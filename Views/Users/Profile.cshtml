@@ -1,0 +1,33 @@
+﻿@model User
+<h1>Profile</h1>
+<img style="width:300px" src="@Model.PhotoPath" />
+<h3>Name : @Model.Name</h3>
+<h3>UserName : @Model.Username</h3>
+<h3>Id : @Model.Id</h3>
+
+<a class=" btn btn-primary" asp-action="logOut">Log Out</a>
+
+<h4>Ticket results:</h4>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Ticket Index</th>
+            <th scope="col">CorreectCount</th>
+            <th scope="col">QuestionCount</th>
+            <th scope="col">Solved time</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (int i = 0; i < Model.TicketResults.Count; i++)
+        {
+            <tr>
+                <th scope="row">@(i + 1)</th>
+                <td>@(Model.TicketResults[i].TicketIndex + 1)</td>
+                <td>@Model.TicketResults[i].QuestionCount</td>
+                <td>@Model.TicketResults[i].CorrectCount</td>            
+                <td>@Model.TicketResults[i].GetDateTime().ToString()</td>            
+            </tr>
+        }
+    </tbody>
+</table>

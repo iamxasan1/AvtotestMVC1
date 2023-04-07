@@ -1,0 +1,22 @@
+﻿@model User 
+
+<h1>Tickets:</h1>
+
+@{
+    for (int i = 0; i < ViewBag.TicketsCount; i++)
+    {
+        <div class="card" style="width: 14rem;">
+            <img src="Autotest/motiondesign.jpg" class="card-img-top" alt="Autotest/images.png">
+            <div class="card-body">
+                <h5 class="card-title">@(i + 1) ticket</h5>
+        
+                <p class="card-text">Haydovchilik guvohnomasini olish uchun yechiladigan testlar 10 tadan to`plam qilingan</p>
+                <a asp-controller="Questions"
+                   asp-action="GetQuestionById"
+                   asp-route-id="@(i*10 + 1)"
+                   asp-route-ticketIndex="@i" class="btn btn-primary">Solve</a>
+
+            </div>
+        </div>
+    }
+}

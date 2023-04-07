@@ -1,0 +1,9 @@
+﻿ticketCard model: Ticket
+	public bool[] isSolved = new bool[10]
+	public bool[] isCorrect = new bool[10]
+
+	TicketCard()
+	{
+		bool[] isSolved = new bool[10]
+		bool[] isCorrect = new bool[10]
+	}

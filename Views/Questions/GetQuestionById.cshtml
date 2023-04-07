@@ -1,0 +1,58 @@
+﻿@{
+    if (ViewBag.IsSucces == true)
+    {
+        QuestionModel question = ViewBag.Question;
+        if (question.Media.Exist)
+        {
+            var imageLink = $"/Autotest/{question.Media.Name}.png";
+            <img src=@imageLink />
+        }
+
+
+        <h3>@question.Id @question.Question</h3>
+
+        for (int i = 0; i < question.Choices.Count; i++)
+        {
+            if (ViewBag.IsAnswered == false)
+            {
+                <a asp-controller="Questions" 
+                    asp-action="GetQuestionById" 
+                    asp-route-id="@question.Id" 
+                    asp-route-choiceIndex=@i>
+                    <h5>@(i + 1) @question.Choices[i].Text</h5>
+                </a>
+            }
+            else
+            {
+                var bg = "";
+
+                if(question.Choices[i].Answer == true)
+                {
+                    bg = "background-color:green";
+                }
+
+                if (i == ViewBag.ChoiceIndex)
+                {
+                    if (ViewBag.IsCorrectAnswer == false)
+                    {
+                        bg = "background-color:red";
+                    }
+
+                }
+
+                <h5 style="@bg">@(i + 1) @question.Choices[i].Text</h5>
+            }
+            <br />
+        }
+        if (ViewBag.IsAnswered)
+        {
+            <a asp-controller="Questions" asp-action="GetQuestionById" asp-route-id="@(question.Id+1)"><h3>Next</h3></a>
+        }
+    }
+    else
+    {
+        <h3>Question Not Found</h3>
+        <h5>Id: @ViewBag.QuestionId</h5>
+    }
+}
+
